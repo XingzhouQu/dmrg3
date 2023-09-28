@@ -100,7 +100,7 @@ function dmrg3(PH, psi0::MPS, sweeps::Sweeps; kwargs...)
     if !isnothing(write_when_maxdim_exceeds)
         if (maxlinkdim(psi) > write_when_maxdim_exceeds) ||
            (maxdim(sweeps, 1) > write_when_maxdim_exceeds)
-            PH = disk(PH; path=write_path)
+            PH = ITensors.disk(PH; path=write_path)
         end
     end
     PH = position!(PH, psi, 1)
@@ -117,7 +117,7 @@ function dmrg3(PH, psi0::MPS, sweeps::Sweeps; kwargs...)
                         "\nWriting environment tensors do disk (write_when_maxdim_exceeds = $write_when_maxdim_exceeds and maxdim(sweeps, sw) = $(maxdim(sweeps, sw))).\nFiles located at path=$write_path\n",
                     )
                 end
-                PH = disk(PH; path=write_path)
+                PH = ITensors.disk(PH; path=write_path)
             end
 
             for (b, ha) in sweepnext(N; ncenter=3)
